@@ -1,0 +1,2 @@
+Similar to student-directory repository, but student-data-project is not using the environment set automatically by create-react-app. Everything is implemented from scratch.
+This project is created using React.js and Firebase. The profile that you have created is secured and the password is hashed to prevent vulnerability of data. The names and the information of the students given are fictional and primarily for development and practical purposes only. Should you wish to get the source code, you can email me at dmclavel@up.edu.ph .

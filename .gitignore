@@ -1,0 +1,35 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+#ignore firebase hosting files
+.firebaserc
+database.rules.json
+firebase.json
+storage.rules
+
+# dependencies
+/node_modules
+
+# testing
+/coverage
+
+# production
+
+#functions
+/fuctions
+/functions/node_modules
+
+#others
+/student-directory.xd
+/package-lock.json
+
+# misc
+.env
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
