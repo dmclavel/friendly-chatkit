@@ -14,12 +14,14 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-router-dom": "^4.3.1",
+    "serve": "^10.1.1",
     "username-generator": "^1.1.0"
   },
   "scripts": {
     "dev": "webpack-dev-server --env.env=dev",
-    "heroku-prebuild": "rimraf dist",
-    "heroku-postbuild": "cross-env NODE_ENV=production webpack -p --env.env=prod"
+    "start": "serve -s dist",
+    "prebuild": "rimraf dist",
+    "build": "cross-env NODE_ENV=production webpack -p --env.env=prod"
   },
   "devDependencies": {
     "@babel/core": "^7.1.6",
