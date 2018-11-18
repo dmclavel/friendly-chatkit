@@ -18,8 +18,8 @@
   },
   "scripts": {
     "dev": "webpack-dev-server --env.env=dev",
-    "prebuild": "rimraf dist",
-    "build": "cross-env NODE_ENV=production webpack -p --env.env=prod"
+    "heroku-prebuild": "rimraf dist",
+    "heroku-postbuild": "cross-env NODE_ENV=production webpack -p --env.env=prod"
   },
   "devDependencies": {
     "@babel/core": "^7.1.6",
