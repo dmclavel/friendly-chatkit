@@ -145,7 +145,7 @@ login = async (event, email, password) => {
 
   signup = async (event, email, password) => {
     event.preventDefault();
-    let hashedPass, generatedUsername, accountCreated;
+    let hashedPass, generatedUsername = '', accountCreated;
     const now = new Date().toString();
     accountCreated = 'Account created on ' + now;
     encrypt(password)
@@ -158,33 +158,25 @@ login = async (event, email, password) => {
 
     await this.setState({ modalLoading: true });
     await fire.auth().createUserWithEmailAndPassword(email, password)
-        .then(userState => {
-            this.setState({ 
-                modalLoading: false,
-                onShowSignupModal: false,
-                onShowSuccessModal: true,
-                successMessage: 'Successfully signed up!',
-                errorLoginMsg: null,
-                emailUserAdd: '',
-                emailUserPass: '' 
-            });
+        .then(async userState => {
+            await generateUsername()
+                .then(username => {
+                    generatedUsername = username;
+                })
+                .catch(err => {
+                    console.log(err);
+                });
 
             const user = fire.auth().currentUser;
-    
+
             fire.database().ref('usersLoggedIn/' + user.uid).set({
-            email
+                email
             })
             .then(() => {})
             .catch((err) => { 
-                // console.log(err); 
+                console.log(err);
             });
-            generateUsername()
-            .then(username => {
-                generatedUsername = username;
-            })
-            .catch(err => {
-                // console.log(err);
-            });
+
             fire.database().ref('usersData/' + user.uid).set({
                 displayName: generatedUsername,
                 email: user.email,
@@ -196,7 +188,17 @@ login = async (event, email, password) => {
             })
             .then(() => {})
             .catch(err => {
-                // console.log(err);
+                console.log(err);
+            });
+
+            this.setState({
+                modalLoading: false,
+                onShowSignupModal: false,
+                onShowSuccessModal: true,
+                successMessage: 'Successfully signed up!',
+                errorLoginMsg: null,
+                emailUserAdd: '',
+                emailUserPass: ''
             });
         })
         .catch(error => {
