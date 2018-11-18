@@ -11,7 +11,6 @@ const sentry = require('@sentry/browser');
 
 // load values from the .env file in this directory into process.env
 dotenv.load();
-console.log(process.env.REACT_APP_FIREBASE_API_KEY);
 sentry.init({ //calling sentry.init even before the React App is rendered
  dsn: process.env.REACT_APP_SENTRY_DSN,
     maxBreadcrumbs: 50,
