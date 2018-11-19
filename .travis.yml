@@ -1,2 +1,20 @@
 language: node_js
+node_js:
+  - "stable"
+cache:
+  directories:
+    - "node_modules"
 sudo: enabled
+deploy:
+  provider: heroku
+  api_key:
+    secure: a3bded2a-c513-4714-9449-1e39411590c3
+  app: student-directory-uplb-trial
+  skip_cleanup: true
+
+notifications:
+  email:
+    recipients:
+    - dmclavel@up.edu.ph
+    on_success: change
+    on_failure: always
