@@ -19,7 +19,7 @@ export default class About extends Component {
                             </span>
                             <span className={classes.Greetings__Underline}></span>
                             <section>
-                                I develop the Student Data Project just for fun. Currently a Computer Science student currently in my senior year. I take interest into front-end development especially 
+                                I develop the Student Data Project just for fun. Currently a Computer Science student in my senior year. I take interest into front-end development especially
                                 everything about React and Vue. I love Javascript, JSX and the idea of Component reusability in React. 
                                 I am currently learning concepts about bundlers and transpilers like Webpack and 
                                 Babel, respectively. I would love to learn how to create REST servers using Node.js and Express.
@@ -27,7 +27,7 @@ export default class About extends Component {
                             <section>
                                 This project is created using React.js and Firebase. The profile that you have created is secured and the password is
                                 hashed to prevent vulnerability of data. The names and the information of the students given are fictional
-                                and primarily for development and practical purposes only. Should you wish to get the source code, you can email me at
+                                and primarily for development and practical purposes only. If you want to ask any question, you can email me at
                                 <code> dmclavel@up.edu.ph </code>.
                             </section>
                         </div>
