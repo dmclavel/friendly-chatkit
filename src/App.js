@@ -10,9 +10,13 @@ import Spinner from './components/UI/Spinner/Spinner';
 import Modal from './components/UI/LoginModal/LoginModal';
 import SpinnerModal from './components/UI/SpinnerModal/SpinnerModal';
 import MainSpinner from './components/UI/Spinner/MainSpinner';
+
 import StudentWindow from './containers/StudentWindow/Student';
 import About from './containers/About/About';
 import Profile from './containers/Profile/Profile';
+import Home from './containers/Home/Home';
+import NotFound from './containers/NotFound/NotFound';
+
 import classes from './App.css';
 
 class App extends Component {
@@ -164,7 +168,7 @@ login = async (event, email, password) => {
                     generatedUsername = username;
                 })
                 .catch(err => {
-                    console.log(err);
+                    // console.log(err);
                 });
 
             const user = fire.auth().currentUser;
@@ -174,7 +178,7 @@ login = async (event, email, password) => {
             })
             .then(() => {})
             .catch((err) => { 
-                console.log(err);
+                // console.log(err);
             });
 
             fire.database().ref('usersData/' + user.uid).set({
@@ -188,7 +192,7 @@ login = async (event, email, password) => {
             })
             .then(() => {})
             .catch(err => {
-                console.log(err);
+                // console.log(err);
             });
 
             this.setState({
@@ -243,7 +247,7 @@ login = async (event, email, password) => {
     });
     await fire.auth().signOut();
     this.props.history.push('/');
-    window.location.reload(false);
+    // window.location.reload(false);
   };
 
   render() {
@@ -295,7 +299,9 @@ login = async (event, email, password) => {
           <Switch>
               <Route path="/profile/:id" render={() => <Profile isAuthenticated={this.state.isAuthenticated} isVerified={this.state.isVerified} />} />
               <Route path="/about" component={About} />
-              <Route path="/" exact render={() => <StudentWindow {...this.state} />}/>
+              <Route path="/student" render={() => <StudentWindow {...this.state} />}/>
+              <Route path="/" exact component={Home} />
+              <Route component={NotFound} />
           </Switch>
         </Aux>
     );

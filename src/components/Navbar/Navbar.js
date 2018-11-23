@@ -36,7 +36,8 @@ export default class Navbar extends Component {
                     <span> STUDENT INFORMATION SYSTEM </span>
                 </div>
                 <div className={classes.NavRight}>
-                    <NavLink to="/" exact activeClassName={classes.active}> Student Section </NavLink>
+                    <NavLink to="/" exact activeClassName={classes.active}> Home </NavLink>
+                    <NavLink to="/student" activeClassName={classes.active}> Student Section </NavLink>
                     <NavLink to="/about" activeClassName={classes.active}> About </NavLink>
                     {content}
                 </div>

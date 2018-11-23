@@ -8,7 +8,7 @@ export default class Profile extends Component {
     state = {
         userProfile: {},
         loading: true
-    }
+    };
 
     componentDidMount() {
         setTimeout(() => { //could have a better fix instead of delaying to give authListener enough time to store user uid
@@ -19,6 +19,12 @@ export default class Profile extends Component {
                 // console.log(err);
             });
         }, 3000);
+    }
+
+    componentWillUnmount () {
+        this.setState({
+            userProfile: {},
+        });
     }
 
     render () {

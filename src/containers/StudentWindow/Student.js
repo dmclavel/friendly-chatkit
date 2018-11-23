@@ -31,6 +31,16 @@ class Student extends Component {
         });
     }
 
+    componentWillUnmount () {
+        this.setState({
+            students: null,
+            studentInfo: {},
+            loading: false,
+            inEditMode: false,
+            showInfoLoading: false
+        });
+    }
+
     componentDidCatch (error, errorInfo) {
         Sentry.withScope(scope => {
             Object.keys(errorInfo).forEach(key => {
