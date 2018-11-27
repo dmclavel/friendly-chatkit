@@ -13,9 +13,8 @@ class Student extends Component {
     state = {
         students: null,
         studentInfo: {},
-        loading: false,
-        inEditMode: false,
-        showInfoLoading: false
+        loading: true,
+        inEditMode: false
     };
 
     componentDidMount () {
@@ -35,7 +34,7 @@ class Student extends Component {
         this.setState({
             students: null,
             studentInfo: {},
-            loading: false,
+            loading: true,
             inEditMode: false,
             showInfoLoading: false
         });
@@ -121,11 +120,6 @@ class Student extends Component {
                                        cancel={(id) => this.cancelEdit(id)}
                                        changed={(event, id, key) => this.handleInfoChange(event, id, key)}/>
             );
-
-        if(this.state.showInfoLoading) {
-            studentInfo = <Spinner/>;
-        }
-
 
         if (!this.state.loading) {
             content = <StudentRightWindow  authenticated={this.props.isAuthenticated}

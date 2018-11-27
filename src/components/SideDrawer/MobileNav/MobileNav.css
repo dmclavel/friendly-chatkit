@@ -1,0 +1,21 @@
+.MobileNav {
+    display: none;
+}
+
+@media only screen and (max-width: 599px) {
+    .MobileNav {
+        display: flex;
+        height: auto;
+        background: linear-gradient(to right, #38ADAE, #CD295A);
+        text-align: right;
+    }
+
+    .MobileNavLeft {
+        display: inherit;
+        padding: 20px;
+        color: #fff;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: center;
+    }
+}

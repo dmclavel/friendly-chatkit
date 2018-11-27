@@ -1,0 +1,45 @@
+.NavigationItems {
+    display: inherit;
+    padding: 20px;
+    color: white;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: center;
+    width: 100%;
+}
+
+.NavigationItems a {
+    text-decoration: none;
+    margin: 0 20px;
+    color: white;
+}
+
+.NavigationItems .active,
+.NavigationItems .active:hover {
+    text-decoration: underline;
+    color: #38ADAE;
+}
+
+.SpanLink {
+    margin: 0 20px;
+    color: white;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 599px) {
+    .NavigationItems {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .NavigationItems a {
+        margin: 15px 0;
+    }
+
+    .SpanLink {
+        margin: 15px 0;
+    }
+}

@@ -1,0 +1,36 @@
+.SideDrawer {
+    display: none;
+}
+
+@media only screen and (max-width: 599px) {
+    .SideDrawer {
+        display: block;
+        position: fixed;
+        width: 280px;
+        max-width: 70%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        z-index: 200;
+        padding: 32px 16px;
+        box-sizing: border-box;
+        transition: transform 0.3s ease-out;
+        background: linear-gradient(to bottom, #CD295A, #38ADAE);
+    }
+
+    .NavLeft {
+        display: inline-block;
+        text-align: center;
+        color: #fff;
+        font-weight: bolder;
+        margin-bottom: 20px;
+    }
+
+    .Open {
+        transform: translateX(0);
+    }
+
+    .Close {
+        transform: translateX(-100%);
+    }
+}
