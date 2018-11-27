@@ -6,14 +6,14 @@ import { generateUsername } from './utils/generateUsername/genUser';
 import fire from './config/fire';
 import Aux from './hoc/Auxiliary/Auxiliary';
 import Navbar from './components/Navbar/Navbar';
-import Spinner from './components/UI/Spinner/Spinner';
-import Modal from './components/UI/LoginModal/LoginModal';
-import SpinnerModal from './components/UI/SpinnerModal/SpinnerModal';
-import MainSpinner from './components/UI/Spinner/MainSpinner';
+import ModalContainer from './hoc/ModalContainer/ModalContainer';
+
 import StudentWindow from './containers/StudentWindow/Student';
 import About from './containers/About/About';
 import Profile from './containers/Profile/Profile';
-import classes from './App.css';
+import Home from './containers/Home/Home';
+import NotFound from './containers/NotFound/NotFound';
+import SideDrawer from "./components/SideDrawer/SideDrawer";
 
 class App extends Component {
   state = {
@@ -35,6 +35,8 @@ class App extends Component {
     onShowLoginModal: false,
     onShowSignupModal: false,
     onShowSuccessModal: false,
+      onShowForgotModal: false,
+      showSideBar: false
   };
 
   componentDidMount() {
@@ -75,9 +77,33 @@ class App extends Component {
     });
 };
 
+  showLoginModalMobile = () => {
+      this.setState({
+          onShowLoginModal: true,
+          showSideBar: !this.state.showSideBar
+      });
+  };
+
 showSignUp = () => {
     this.setState({
         onShowSignupModal: true
+    });
+};
+
+showSignUpOptimized = () => {
+  this.setState({
+      onShowLoginModal: false,
+      emailUserAdd: '',
+      emailUserPass: '',
+      errorLoginMsg: null,
+      onShowSignupModal: true
+  });
+};
+
+showSignUpMobile = () => {
+    this.setState({
+        onShowSignupModal: true,
+        showSideBar: !this.state.showSideBar
     });
 };
 
@@ -87,6 +113,7 @@ closeLoginModal = () => {
         emailUserPass: '',
         onShowLoginModal: false,
         onShowSignupModal: false,
+        onShowForgotModal: false,
         errorLoginMsg: null
     });
 };
@@ -110,6 +137,35 @@ handleEmailChange = (event) => {
 
 handlePasswordChange = (event) => {
     this.setState({ emailUserPass: event.target.value });
+};
+
+openForgotModal = () => {
+  this.setState({
+      onShowForgotModal: true,
+      emailUserAdd: '',
+      emailUserPass: '',
+      errorLoginMsg: null,
+      onShowLoginModal: false
+  });
+};
+
+forgotPassword = (emailAddress) => {
+    fire.auth().sendPasswordResetEmail(emailAddress)
+        .then(() => {
+            this.setState({
+               onShowForgotModal: false,
+                emailUserAdd: '',
+                emailUserPass: '',
+                errorLoginMsg: null
+            });
+        })
+        .catch((error) => {
+            this.setState({
+                emailUserAdd: '',
+                emailUserPass: '',
+                errorLoginMsg: error.message
+            });
+        });
 };
 
 login = async (event, email, password) => {
@@ -164,7 +220,7 @@ login = async (event, email, password) => {
                     generatedUsername = username;
                 })
                 .catch(err => {
-                    console.log(err);
+                    // console.log(err);
                 });
 
             const user = fire.auth().currentUser;
@@ -174,7 +230,7 @@ login = async (event, email, password) => {
             })
             .then(() => {})
             .catch((err) => { 
-                console.log(err);
+                // console.log(err);
             });
 
             fire.database().ref('usersData/' + user.uid).set({
@@ -188,7 +244,7 @@ login = async (event, email, password) => {
             })
             .then(() => {})
             .catch(err => {
-                console.log(err);
+                // console.log(err);
             });
 
             this.setState({
@@ -220,7 +276,7 @@ login = async (event, email, password) => {
   verify = () => {
     const user = fire.auth().currentUser;
 
-    this.setState({ spinnerModalLoading: true });
+    this.setState({ spinnerModalLoading: true, showSideBar: !this.state.showSideBar });
     user.sendEmailVerification()
         .then(res => {
 
@@ -246,6 +302,12 @@ login = async (event, email, password) => {
     window.location.reload(false);
   };
 
+  showSideBar = () => {
+    this.setState({
+        showSideBar: !this.state.showSideBar
+    });
+  };
+
   render() {
     return (
         <Aux>
@@ -253,49 +315,22 @@ login = async (event, email, password) => {
                   showSignUp={this.showSignUp} signup={this.signup}
                   verify={this.verify} authenticated={this.state.isAuthenticated}
                   isVerified={this.state.isVerified} />
-          <Modal show={this.state.onShowLoginModal}
-                  backdropClicked={this.closeLoginModal}>
-              {this.state.modalLoading ?
-                  <Spinner modal={true}/>
-                  :
-                  <div className={classes.LoginModal}>
-                      <input type="text" placeholder="Email-address" onChange={this.handleEmailChange} value={this.state.emailUserAdd} />
-                      <input type="password" placeholder="Password" onChange={this.handlePasswordChange} value={this.state.emailUserPass} />
-                      {this.state.errorLoginMsg === null ? null: <p style={{color: '#CD295A', fontWeight: 'bold', textAlign: 'center'}}> {this.state.errorLoginMsg} </p>}
-                      <button onClick={(event) => this.login(event, this.state.emailUserAdd, this.state.emailUserPass)}> Login </button>
-                      <button onClick={this.closeLoginModal}> Cancel </button>
-                  </div> 
-              }
-          </Modal>
-          <Modal show={this.state.onShowSignupModal} backdropClicked={this.closeLoginModal}
-                  closeModal={this.closeLoginModal}>
-              {this.state.modalLoading ?
-                  <Spinner modal={true}/>
-                  :
-                  <div className={classes.LoginModal}>
-                      <input type="text" placeholder="Email-address" onChange={this.handleEmailChange} value={this.state.emailUserAdd} />
-                      <input type="password" placeholder="Password" onChange={this.handlePasswordChange} value={this.state.emailUserPass} />
-                      {this.state.errorLoginMsg === null ? null: <p style={{color: '#CD295A', fontWeight: 'bold', textAlign: 'center'}}> {this.state.errorLoginMsg} </p>}
-                      <button onClick={(event) => this.signup(event, this.state.emailUserAdd, this.state.emailUserPass)}> Sign Up </button>
-                      <button onClick={this.closeLoginModal}> Cancel </button>
-                  </div> 
-              }
-          </Modal>
-          <Modal show={this.state.onShowSuccessModal} backdropClicked={this.closeSuccessModal}
-                  closeModal={this.closeSuccessModal}>
-              <div className={classes.SuccessModal}>
-                  <strong style={{color: '#CD295A'}}> {this.state.successMessage} </strong>
-                  <button onClick={this.closeSuccessModal}> Done </button>
-              </div>
-          </Modal>
-          <SpinnerModal show={this.state.spinnerModalLoading} backdropClicked={this.closeSpinnerModal}>
-              <MainSpinner />
-              <strong style={{display: 'block', color: '#ccc', textAlign: 'center', fontWeight: 'bolder'}}> The verification e-mail has been sent! </strong>
-          </SpinnerModal>
+            <SideDrawer show={this.state.showSideBar} login={this.showLoginModalMobile} logout={this.logout}
+                    showSignUp={this.showSignUpMobile} signup={this.signup}
+                    verify={this.verify} authenticated={this.state.isAuthenticated}
+                    isVerified={this.state.isVerified} showSideBar={this.showSideBar} backdropClicked={this.showSideBar}/>
+            <ModalContainer handleEmailChange={this.handleEmailChange} handlePasswordChange={this.handlePasswordChange} onShowLoginModal={this.state.onShowLoginModal}
+            closeLoginModal={this.closeLoginModal} emailUserAdd={this.state.emailUserAdd} emailUserPass={this.state.emailUserPass} errorLoginMsg={this.state.errorLoginMsg}
+            login={(event, user, password) => this.login(event, user, password)} onShowSignupModal={this.state.onShowSignupModal} modalLoading={this.state.modalLoading}
+            signup={(event, user, password) => this.signup(event, user, password)} onShowSuccessModal={this.state.onShowSuccessModal} closeSuccessModal={this.state.closeSuccessModal}
+            successMessage={this.state.successMessage} spinnerModalLoading={this.state.spinnerModalLoading} closeSpinnerModal={this.closeSpinnerModal} showSignUp={this.showSignUpOptimized}
+            forgotPassword={(emailAddress) => this.forgotPassword(emailAddress)} openForgotModal={this.openForgotModal} onShowForgotModal={this.state.onShowForgotModal}/>
           <Switch>
-              <Route path="/profile/:id" render={() => <Profile isAuthenticated={this.state.isAuthenticated} isVerified={this.state.isVerified} />} />
-              <Route path="/about" component={About} />
-              <Route path="/" exact render={() => <StudentWindow {...this.state} />}/>
+              <Route path="/profile/:id" exact render={() => <Profile isAuthenticated={this.state.isAuthenticated} isVerified={this.state.isVerified} />} />
+              <Route path="/about" exact component={About} />
+              <Route path="/student" exact render={() => <StudentWindow {...this.state} />}/>
+              <Route path="/" exact component={Home} />
+              <Route component={NotFound} />
           </Switch>
         </Aux>
     );

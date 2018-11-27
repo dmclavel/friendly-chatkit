@@ -16,46 +16,9 @@
     width: 100%;
 }
 
-.NavRight {
-    display: inherit;
-    padding: 20px;
-    color: white;
-    align-items: center;
-    justify-content: flex-end;
-    text-align: center;
-    width: 100%;
-}
-
-.NavRight a {
-    text-decoration: none;
-    margin: 0 20px;
-    color: white;
-}
-
-.NavRight span {
-    margin: 0 20px;
-    color: white;
-    cursor: pointer;
-}
-
-.Navbar .NavRight span:hover,
-.Navbar .NavRight span:active,
-.Navbar .active {
-    text-decoration: underline;
-    color: #38ADAE;
-}
-
 @media only screen and (max-width: 599px) {
     .Navbar {
-        font-size: 0.5em;
-    }
-
-    .NavRight a {
-        margin: 0 5px;
-    }
-
-    .Navbar span {
-        margin: 0 5px;
+        display: none;
     }
 }
 

@@ -1,0 +1,125 @@
+.LoginModal {
+    display: flex;
+    flex-direction: column;
+}
+
+.InputEmail {
+    position: relative;
+    margin: 10px;
+}
+
+.InputPassword {
+    position: relative;
+    margin: 10px;
+}
+
+.IconEmail {
+    position: absolute;
+    left: 10px;
+    top: 18%;
+    color: #fff;
+}
+
+.IconPassword {
+    position: absolute;
+    left: 10px;
+    top: 18%;
+    color: #fff;
+}
+
+.LoginModal input {
+    width: 50%;
+    height: 40px;
+    border: none;
+    padding: 0 40px;
+    background-color: #CD295A;
+    font: inherit;
+    color: #fff;
+    outline: none;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+
+}
+
+.LoginModal input::placeholder {
+    color: #fff;
+}
+
+.LoginModal button {
+    width: 20%;
+    margin: 10px;
+    cursor: pointer;
+    border: 2px solid #CD295A;
+    background-color: #CD295A;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+    outline: none;
+    color: #fff;
+}
+
+.SuccessModal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.SuccessModal button {
+    margin: 20px;
+    width: 20%;
+    border-radius: 20px;
+    cursor: pointer;
+    border: 1px solid #CD295A;
+    background-color: #CD295A;
+    color: #fff;
+}
+
+.LoginModal > div {
+    display: flex;
+}
+
+.LoginModal div div {
+    display: inline-flex;
+}
+
+.LoginModal div div span {
+    color: #fff;
+    cursor: pointer;
+}
+
+.LoginModal div div span:hover {
+    color: #CD295A;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.padLeftOnModal {
+    margin: 20px 10px;
+    width: 90%;
+}
+
+.alignRightOnModal {
+    justify-content: flex-end;
+    margin: 20px 10px;
+    width: 45%;
+}
+
+@media only screen and (max-width: 599px) {
+    .LoginModal button {
+        width: 30%;
+    }
+
+    .LoginModal > div {
+        flex-direction: column;
+    }
+
+    .padLeftOnModal {
+        margin: 10px;
+        width: 100%;
+
+    }
+
+    .alignRightOnModal {
+        justify-content: flex-start;
+        margin: 10px;
+        width: 100%;
+
+    }
+}
