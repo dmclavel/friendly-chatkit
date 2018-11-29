@@ -3,6 +3,7 @@ import React from "react";
 import Spinner from "../UI/Spinner/Spinner";
 import fire from "../../config/fire";
 import classes from "./MessageList.css";
+import Aux from "../../hoc/Auxiliary/Auxiliary";
 
 const messageList = props => {
     let content = <Spinner chatBox={true} />;
@@ -11,23 +12,21 @@ const messageList = props => {
             <ul className={classes.MessageList}>
                 {
                     props.messages.map(message => {
-                        let style = {}, alignRightStyle={};
-                        if (message.senderId === fire.auth().currentUser.uid) {
-                            style = {backgroundColor: '#38ADAE', color: '#fff'};
-                            alignRightStyle = {alignItems: 'flex-end'}
-                        }
+                        let style = {};
+                        if (message.senderId === fire.auth().currentUser.uid)
+                            style = {backgroundColor: '#38ADAE', color: '#fff', float: 'right'};
+
 
                         return (
-                            <div style={alignRightStyle} className={classes.MessageBox} key={message.id}>
-                                <li style={style}>
-                                    <div>
-                                        Sender: {message.sender.name}
-                                    </div>
-                                    <div style={{padding: '0 20px'}}>
-                                        {message.text}
-                                    </div>
-                                </li>
-                            </div>
+                            <li style={style} key={message.id}>
+                                <span className={classes.TimeStyle}> {message.createdAt} </span>
+                                <div>
+                                    Sender: {message.sender.name}
+                                </div>
+                                <div style={{padding: '0 20px'}}>
+                                    {message.text}
+                                </div>
+                            </li>
                         )
                     })
                 }

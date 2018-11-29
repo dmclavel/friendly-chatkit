@@ -4,6 +4,7 @@ import { ChatManager, TokenProvider } from "@pusher/chatkit-client";
 import MessageList from "../../components/MessageList/MessageList";
 import SendMessageForm from "../../components/UI/SendMessageForm/SendMessageForm";
 import dotenv from "dotenv";
+import fire from "../../config/fire";
 import classes from "./Chat.css";
 import { getName } from "../../utils/getName/getName";
 
@@ -15,6 +16,7 @@ export default class Chat extends Component {
         this.state = {
             message: '',
             messages: [],
+            // joinedUser: 'A user joined',
             currentUser: null,
             stillFetching: true
         };
@@ -23,75 +25,93 @@ export default class Chat extends Component {
     }
 
     componentDidMount() {
-        setTimeout(async () => {
-            dotenv.load();
-            let username = '';
-            const chatkit = new Chatkit.default({
-                instanceLocator: process.env.REACT_APP_INSTANCE_LOC,
-                key: process.env.REACT_APP_CHATKIT_KEY
-            });
-            await getName()
-                .then(name => {
-                    username = name;
-                })
-                .catch(err => {
-                    throw new Error(err);
+        // const user = await fire.getCurrentUser();
+        dotenv.load();
+        fire.auth().onAuthStateChanged(async user => {
+            if (user) {
+                let username = '';
+                const chatkit = new Chatkit.default({
+                    instanceLocator: process.env.REACT_APP_INSTANCE_LOC,
+                    key: process.env.REACT_APP_CHATKIT_KEY
                 });
-            await chatkit.getUser({
-                id: this.props.userId
+                await getName()
+                    .then(name => {
+                        username = name;
+                    })
+                    .catch(err => {
+                        throw new Error(err);
+                    });
+                await chatkit.getUser({
+                    id: user.uid
+                })
+                    .then(() => {
+
+                    })
+                    .catch(() => {
+                        chatkit.createUser({
+                            id: user.uid,
+                            name: username
+                        })
+                            .then(res => {
+                                this.setState({ currentUser: res });
+                                // console.log(`User created successfully!`);
+                            })
+                            .catch(err => {
+                                // console.log(err);
+                            });
+                    });
+
+                const chatManager = new ChatManager({
+                    instanceLocator: process.env.REACT_APP_INSTANCE_LOC,
+                    userId: user.uid,
+                    tokenProvider: new TokenProvider({ url: process.env.REACT_APP_TEST_TOKEN })
+                });
+
+                await chatManager.connect()
+                    .then(currentUser => {
+                        this.setState({ currentUser });
+                        // console.log(`Successful connection ${currentUser}`);
+                        currentUser.joinRoom({ roomId: process.env.REACT_APP_ROOM_ID })
+                            .then(room => {
+                                this.setState({ stillFetching: false });
+                                // console.log(`Joined room with ID: ${room.id}`);
+                            })
+                            .catch(err => {
+                                // console.log(`Error joining room ${someRoorID}: ${err}`);
+                            });
+
+                        currentUser.subscribeToRoom({
+                            roomId: process.env.REACT_APP_ROOM_ID,
+                            hooks: {
+                                onMessage: message => {
+                                    this.setState({
+                                        messages: this.state.messages.concat(message)
+                                    });
+                                }
+                                // onUserJoined: user => {
+                                //     this.setState({ joinedUser: `${user} joined the chat room.` })
+                                // }
+                            },
+                            messageLimit: 50
+                        })
+                    })
+                    .catch(err => {
+                        // console.log(`Error on connection ${err}`);
+                    });
+            }
+        });
+        
+    }
+
+    componentWillUnmount() {
+        dotenv.load();
+        this.state.currentUser.leaveRoom({ roomId: process.env.REACT_APP_ROOM_ID })
+            .then(room => {
+
             })
-                .then(() => {
+            .catch(err => {
 
-                })
-                .catch(() => {
-                    chatkit.createUser({
-                        id: this.props.userId,
-                        name: username
-                    })
-                        .then(res => {
-                            this.setState({ currentUser: res });
-                            // console.log(`User created successfully!`);
-                        })
-                        .catch(err => {
-                            // console.log(err);
-                        });
-                });
-
-            const chatManager = new ChatManager({
-                instanceLocator: process.env.REACT_APP_INSTANCE_LOC,
-                userId: this.props.userId,
-                tokenProvider: new TokenProvider({ url: process.env.REACT_APP_TEST_TOKEN })
             });
-
-            await chatManager.connect()
-                .then(currentUser => {
-                    this.setState({ currentUser });
-                    // console.log(`Successful connection ${currentUser}`);
-                    currentUser.joinRoom({ roomId: process.env.REACT_APP_ROOM_ID })
-                        .then(room => {
-                            this.setState({ stillFetching: false });
-                            // console.log(`Joined room with ID: ${room.id}`);
-                        })
-                        .catch(err => {
-                            // console.log(`Error joining room ${someRoorID}: ${err}`);
-                        });
-
-                    currentUser.subscribeToRoom({
-                        roomId: process.env.REACT_APP_ROOM_ID,
-                        hooks: {
-                            onMessage: message => {
-                                this.setState({
-                                    messages: this.state.messages.concat(message)
-                                });
-                            }
-                        },
-                        messageLimit: 50
-                    })
-                })
-                .catch(err => {
-                    // console.log(`Error on connection ${err}`);
-                });
-        }, 3000);
     }
 
     handleMessageChange(e) {
