@@ -1,0 +1,40 @@
+.MessageList {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    height: 500px;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    padding-inline-start: 0;
+    overflow: auto;
+}
+
+.MessageBox {
+    display: inherit;
+    flex-direction: inherit;
+}
+
+.MessageBox li {
+    width: 25%;
+    margin: 15px;
+    border: 1px solid silver;
+    padding: 0 20px;
+    background-color: silver;
+    border-radius: 8px;
+    list-style: none;
+}
+
+.MessageBox li div {
+    padding: 8px 0;
+}
+
+@media only screen and (max-width: 599px) {
+    .MessageList {
+        height: 350px;
+    }
+
+    .MessageBox li {
+        width: 60%;
+        font-size: 12px;
+    }
+}

@@ -8,6 +8,10 @@ const spinner = (props) => {
         style = {
             color: '#CD295A'
         }
+    } else if (props.chatBox) {
+        style = {
+            color: 'silver'
+        }
     }
     return (
         <div style={style} className={classes.loader}>

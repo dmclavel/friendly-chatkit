@@ -19,7 +19,9 @@ const config = {
         ]
     },
     node: { //something with handling of fs module in web target
-        fs: 'empty'
+        fs: 'empty',
+        net: 'empty',
+        tls: 'empty'
     },
     optimization: {
         splitChunks: {

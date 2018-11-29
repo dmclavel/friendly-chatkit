@@ -17,6 +17,7 @@ const navigationItems = (props) => {
         content = (
             <Aux>
                 <NavLink to={"/profile/" + user.uid} activeClassName={classes.active}> Profile </NavLink>
+                <NavLink to="/chat" activeClassName={classes.active}> Chat </NavLink>
                 <span className={classes.SpanLink} onClick={props.logout}> Logout </span>
             </Aux>
         );
