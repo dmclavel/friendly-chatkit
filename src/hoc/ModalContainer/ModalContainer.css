@@ -28,7 +28,7 @@
 }
 
 .LoginModal input {
-    width: 50%;
+    width: 100%;
     height: 40px;
     border: none;
     padding: 0 40px;
@@ -102,6 +102,10 @@
 }
 
 @media only screen and (max-width: 599px) {
+    .LoginModal input {
+        width: inherit;
+    }
+    
     .LoginModal button {
         width: 30%;
     }

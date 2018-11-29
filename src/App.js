@@ -14,6 +14,7 @@ import Profile from './containers/Profile/Profile';
 import Home from './containers/Home/Home';
 import NotFound from './containers/NotFound/NotFound';
 import SideDrawer from "./components/SideDrawer/SideDrawer";
+import Chat from "./containers/Chat/Chat";
 
 class App extends Component {
   state = {
@@ -329,6 +330,7 @@ login = async (event, email, password) => {
               <Route path="/profile/:id" exact render={() => <Profile isAuthenticated={this.state.isAuthenticated} isVerified={this.state.isVerified} />} />
               <Route path="/about" exact component={About} />
               <Route path="/student" exact render={() => <StudentWindow {...this.state} />}/>
+              <Route path="/chat" exact render={() => <Chat userId={this.state.user.uid} />} />
               <Route path="/" exact component={Home} />
               <Route component={NotFound} />
           </Switch>
