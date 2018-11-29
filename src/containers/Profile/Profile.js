@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { getUserData } from '../../utils/getUserData/getUserData';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import fire from "../../config/fire";
 import classes from './Profile.css';
 
 export default class Profile extends Component {
@@ -11,14 +12,16 @@ export default class Profile extends Component {
     };
 
     componentDidMount() {
-        setTimeout(() => { //could have a better fix instead of delaying to give authListener enough time to store user uid
-            getUserData().then(uData => {
-                this.setState({ userProfile: uData, loading: false });
-            })
-            .catch(err => {
-                // console.log(err);
-            });
-        }, 3000);
+        fire.auth().onAuthStateChanged(user => {
+            if (user) {
+                getUserData().then(uData => {
+                    this.setState({ userProfile: uData, loading: false });
+                })
+                    .catch(err => {
+                        // console.log(err);
+                    });
+            }
+        });
     }
 
     componentWillUnmount () {

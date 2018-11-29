@@ -9,12 +9,7 @@
     overflow: auto;
 }
 
-.MessageBox {
-    display: inherit;
-    flex-direction: inherit;
-}
-
-.MessageBox li {
+.MessageList li {
     width: 25%;
     margin: 15px;
     border: 1px solid silver;
@@ -22,10 +17,20 @@
     background-color: silver;
     border-radius: 8px;
     list-style: none;
+    position: relative;
 }
 
-.MessageBox li div {
+.MessageList li div {
     padding: 8px 0;
+}
+
+.TimeStyle {
+    bottom: 100%;
+    right: 0;
+    position: absolute;
+    color: silver;
+    font-weight: bold;
+    font-size: 10px;
 }
 
 @media only screen and (max-width: 599px) {
@@ -33,7 +38,7 @@
         height: 350px;
     }
 
-    .MessageBox li {
+    .MessageList li {
         width: 60%;
         font-size: 12px;
     }
