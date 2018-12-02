@@ -1,3 +1,22 @@
+.ScrollDownDiv {
+    text-align: center;
+    margin: 10px;
+    color: rgba(0,0,0,0.3);
+}
+
+.ScrollDownDiv span {
+    font-weight: bold;
+    font-size: 10px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.ScrollDownDiv i {
+    vertical-align: middle;
+    font-size: 15px;
+    cursor: pointer;
+}
+
 .MessageList {
     display: flex;
     flex-direction: column;

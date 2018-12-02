@@ -16,7 +16,6 @@ export default class Chat extends Component {
         this.state = {
             message: '',
             messages: [],
-            // joinedUser: 'A user joined',
             currentUser: null,
             stillFetching: true
         };
@@ -105,13 +104,15 @@ export default class Chat extends Component {
 
     componentWillUnmount() {
         dotenv.load();
-        this.state.currentUser.leaveRoom({ roomId: process.env.REACT_APP_ROOM_ID })
-            .then(room => {
+        if (!this.state.stillFetching) {
+            this.state.currentUser.leaveRoom({ roomId: process.env.REACT_APP_ROOM_ID })
+                .then(room => {
 
-            })
-            .catch(err => {
+                })
+                .catch(err => {
 
-            });
+                });
+        }
     }
 
     handleMessageChange(e) {
