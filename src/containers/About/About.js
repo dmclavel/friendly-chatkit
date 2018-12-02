@@ -25,9 +25,8 @@ export default class About extends Component {
                                 Babel, respectively. I would love to learn how to create REST servers using Node.js and Express.
                             </section>
                             <section>
-                                This project is created using React.js and Firebase. The profile that you have created is secured and the password is
-                                hashed to prevent vulnerability of data. The names and the information of the students given are fictional
-                                and primarily for development and practical purposes only. If you want to ask any question, you can email me at
+                                This project is created using React.js and Firebase. All of the features are still not final. More functionality will be added soon.
+                                If you want to ask any question, you can email me at
                                 <code> dmclavel@up.edu.ph </code>.
                             </section>
                         </div>
