@@ -17,7 +17,7 @@ export default class MessageList extends Component {
             content = (
                 <Aux>
                     <div className={classes.ScrollDownDiv}>
-                        <span onClick={this.scrollToBottom}> Scroll down to the latest chat</span>
+                        <span onClick={this.scrollToBottom}> Scroll down to the latest message</span>
                         <i onClick={this.scrollToBottom} className="material-icons"> vertical_align_bottom </i>
                     </div>
                     <ul className={classes.MessageList}>
