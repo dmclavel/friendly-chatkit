@@ -8,7 +8,7 @@ export default class Navbar extends Component {
         return (
             <nav className={classes.Navbar}>
                 <div className={classes.NavLeft}>
-                    <span> STUDENT INFORMATION SYSTEM </span>
+                    <span> AMICI </span>
                 </div>
                 <NavigationItems authenticated={this.props.authenticated} isVerified={this.props.isVerified} login={this.props.login}
                                  verify={this.props.verify} logout={this.props.logout} showSignUp={this.props.showSignUp}/>

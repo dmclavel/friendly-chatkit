@@ -1,14 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import { encrypt } from './utils/password-encrypt/encrypt';
 import { generateUsername } from './utils/generateUsername/genUser';
 
 import fire from './config/fire';
-import Aux from './hoc/Auxiliary/Auxiliary';
 import Navbar from './components/Navbar/Navbar';
 import ModalContainer from './hoc/ModalContainer/ModalContainer';
-
-import StudentWindow from './containers/StudentWindow/Student';
 import About from './containers/About/About';
 import Profile from './containers/Profile/Profile';
 import Home from './containers/Home/Home';
@@ -279,12 +276,8 @@ login = async (event, email, password) => {
 
     this.setState({ spinnerModalLoading: true, showSideBar: !this.state.showSideBar });
     user.sendEmailVerification()
-        .then(res => {
-
-        })
-        .catch(err => {
-
-        });
+        .then(() => {})
+        .catch(() => {});
   };
 
   logout = async () => {
@@ -292,12 +285,8 @@ login = async (event, email, password) => {
     await fire.database().ref('usersLoggedIn/' + fire.auth().currentUser.uid).set({
       email: null
     })
-    .then(res => {
-      
-    })
-    .catch(err => {
-    //   console.log(err);
-    });
+    .then(() => {})
+    .catch(() => {});
     await fire.auth().signOut();
     this.props.history.push('/');
     window.location.reload(false);
@@ -311,7 +300,7 @@ login = async (event, email, password) => {
 
   render() {
     return (
-        <Aux>
+        <Fragment>
           <Navbar login={this.showLoginModal} logout={this.logout}
                   showSignUp={this.showSignUp} signup={this.signup}
                   verify={this.verify} authenticated={this.state.isAuthenticated}
@@ -329,12 +318,11 @@ login = async (event, email, password) => {
           <Switch>
               <Route path="/profile/:id" exact render={() => <Profile isAuthenticated={this.state.isAuthenticated} isVerified={this.state.isVerified} />} />
               <Route path="/about" exact component={About} />
-              <Route path="/student" exact render={() => <StudentWindow {...this.state} />}/>
-              <Route path="/chat" exact render={() => <Chat userId={this.state.user.uid} />} />
+              <Route path="/chat" exact component={Chat} />
               <Route path="/" exact component={Home} />
               <Route component={NotFound} />
           </Switch>
-        </Aux>
+        </Fragment>
     );
   }
 }

@@ -24,28 +24,25 @@ export default class Chat extends Component {
     }
 
     componentDidMount() {
-        // const user = await fire.getCurrentUser();
         dotenv.load();
-        fire.auth().onAuthStateChanged(async user => {
+        fire.auth().onAuthStateChanged(user => {
             if (user) {
                 let username = '';
                 const chatkit = new Chatkit.default({
                     instanceLocator: process.env.REACT_APP_INSTANCE_LOC,
                     key: process.env.REACT_APP_CHATKIT_KEY
                 });
-                await getName()
+                getName()
                     .then(name => {
                         username = name;
                     })
                     .catch(err => {
                         throw new Error(err);
                     });
-                await chatkit.getUser({
+                chatkit.getUser({
                     id: user.uid
                 })
-                    .then(() => {
-
-                    })
+                    .then(() => {})
                     .catch(() => {
                         chatkit.createUser({
                             id: user.uid,
@@ -53,11 +50,8 @@ export default class Chat extends Component {
                         })
                             .then(res => {
                                 this.setState({ currentUser: res });
-                                // console.log(`User created successfully!`);
                             })
-                            .catch(err => {
-                                // console.log(err);
-                            });
+                            .catch(() => {});
                     });
 
                 const chatManager = new ChatManager({
@@ -66,18 +60,14 @@ export default class Chat extends Component {
                     tokenProvider: new TokenProvider({ url: process.env.REACT_APP_TEST_TOKEN })
                 });
 
-                await chatManager.connect()
+                chatManager.connect()
                     .then(currentUser => {
                         this.setState({ currentUser });
-                        // console.log(`Successful connection ${currentUser}`);
                         currentUser.joinRoom({ roomId: process.env.REACT_APP_ROOM_ID })
                             .then(room => {
                                 this.setState({ stillFetching: false });
-                                // console.log(`Joined room with ID: ${room.id}`);
                             })
-                            .catch(err => {
-                                // console.log(`Error joining room ${someRoorID}: ${err}`);
-                            });
+                            .catch(() => {});
 
                         currentUser.subscribeToRoom({
                             roomId: process.env.REACT_APP_ROOM_ID,
@@ -94,9 +84,7 @@ export default class Chat extends Component {
                             messageLimit: 50
                         })
                     })
-                    .catch(err => {
-                        // console.log(`Error on connection ${err}`);
-                    });
+                    .catch(() => {});
             }
         });
         
@@ -106,12 +94,8 @@ export default class Chat extends Component {
         dotenv.load();
         if (!this.state.stillFetching) {
             this.state.currentUser.leaveRoom({ roomId: process.env.REACT_APP_ROOM_ID })
-                .then(room => {
-
-                })
-                .catch(err => {
-
-                });
+                .then(room => {})
+                .catch(err => {});
         }
     }
 
@@ -130,13 +114,10 @@ export default class Chat extends Component {
             text: this.state.message,
             roomId: process.env.REACT_APP_ROOM_ID
         })
-            .then(res => {
+            .then(() => {
                 this.setState({ message: '' });
-                // console.log(res);
             })
-            .catch(err => {
-                // console.log(err);
-            })
+            .catch(err => {})
     }
 
     render () {

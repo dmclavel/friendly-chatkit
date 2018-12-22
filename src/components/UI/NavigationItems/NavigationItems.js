@@ -32,7 +32,6 @@ const navigationItems = (props) => {
     return (
         <div className={classes.NavigationItems}>
             <NavLink to="/" exact activeClassName={classes.active}> Home </NavLink>
-            <NavLink to="/student" activeClassName={classes.active}> Student Section </NavLink>
             <NavLink to="/about" activeClassName={classes.active}> About </NavLink>
             {content}
         </div>

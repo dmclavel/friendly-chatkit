@@ -2,18 +2,20 @@
     display: flex;
     justify-content: flex-end;
     height: auto;
-    background: linear-gradient(to right, #38ADAE, #CD295A);
+    background-color: #241C1E;
     text-align: right;
 }
 
 .NavLeft {
     display: inherit;
-    padding: 20px;
-    color: white;
+    padding: 20px 0 20px 40px;
+    color: #bc9643;
     justify-content: flex-start;
     align-items: center;
     text-align: center;
     width: 100%;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5em;
 }
 
 @media only screen and (max-width: 599px) {
