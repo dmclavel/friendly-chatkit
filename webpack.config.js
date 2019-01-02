@@ -5,7 +5,6 @@ const webpackMerge = require('webpack-merge');
 
 // We can include Webpack plugins, through addons, that do
 // not need to run every time we are developing.
-// We will see an example when we set up 'Bundle Analyzer'
 const addons = (/* string | string[] */ addonsArg) => {
 
     // Normalize array of addons (flatten)

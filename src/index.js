@@ -5,13 +5,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { BrowserRouter as Router } from 'react-router-dom';
-
-const dotenv = require('dotenv');
-const sentry = require('@sentry/browser');
+import dotenv from 'dotenv';
+import { init } from '@sentry/browser';
 
 // load values from the .env file in this directory into process.env
 dotenv.load();
-sentry.init({ //calling sentry.init even before the React App is rendered
+init({ //calling sentry.init even before the React App is rendered
  dsn: process.env.REACT_APP_SENTRY_DSN,
     maxBreadcrumbs: 50,
     debug: true,
@@ -26,7 +25,7 @@ const render = Component =>
     ReactDOM.render(
         <AppContainer>
             <Router>
-                <Component/>
+                <Component />
             </Router>
         </AppContainer>,
         document.getElementById('root')

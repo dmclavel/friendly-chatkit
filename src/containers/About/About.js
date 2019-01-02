@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import classes from './About.css';
 
-export default class About extends Component {
+class About extends Component {
     render () {
         return (
             <div className={classes.About}>
@@ -39,3 +39,5 @@ export default class About extends Component {
         );
     }
 }
+
+export default About;

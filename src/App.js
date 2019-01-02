@@ -1,19 +1,19 @@
-import React, { Component, Fragment, lazy, Suspense } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import { encrypt } from './utils/password-encrypt/encrypt';
 import { generateUsername } from './utils/generateUsername/genUser';
 
 import fire from './config/fire';
+import Home from './containers/Home/Home';
 import Navbar from './components/Navbar/Navbar';
 import ModalContainer from './hoc/ModalContainer/ModalContainer';
-// import About from './containers/About/About';
-import Profile from './containers/Profile/Profile';
-import Home from './containers/Home/Home';
-import NotFound from './containers/NotFound/NotFound';
 import SideDrawer from "./components/SideDrawer/SideDrawer";
-import Chat from "./containers/Chat/Chat";
+import LazyLoad from './hoc/AsyncComponent/LazyLoad';
 
-const About = lazy(() => import('./containers/About/About'));
+const Profile = LazyLoad(() => import('./containers/Profile/Profile'));
+const About = LazyLoad(() => import('./containers/About/About'));
+const Chat = LazyLoad(() => import('./containers/Chat/Chat'));
+const NotFound = LazyLoad(() => import('./containers/NotFound/NotFound'));
 
 class App extends Component {
   state = {
@@ -317,17 +317,13 @@ login = async (event, email, password) => {
             signup={(event, user, password) => this.signup(event, user, password)} onShowSuccessModal={this.state.onShowSuccessModal} closeSuccessModal={this.state.closeSuccessModal}
             successMessage={this.state.successMessage} spinnerModalLoading={this.state.spinnerModalLoading} closeSpinnerModal={this.closeSpinnerModal} showSignUp={this.showSignUpOptimized}
             forgotPassword={(emailAddress) => this.forgotPassword(emailAddress)} openForgotModal={this.openForgotModal} onShowForgotModal={this.state.onShowForgotModal}/>
-          <Switch>
-              <Route path="/profile/:id" exact render={() => <Profile isAuthenticated={this.state.isAuthenticated} isVerified={this.state.isVerified} />} />
-              <Route path="/about" exact render={() => (
-                  <Suspense fallback={<p> Loading ... </p>}>
-                      <About />
-                  </Suspense>
-              )} />
-              <Route path="/chat" exact component={Chat} />
-              <Route path="/" exact component={Home} />
-              <Route component={NotFound} />
-          </Switch>
+            <Switch>
+                <Route path="/profile/:id" exact render={() => <Profile isAuthenticated={this.state.isAuthenticated} isVerified={this.state.isVerified} />} />
+                <Route path="/about" exact component={About} />
+                <Route path="/chat" exact component={Chat} />
+                <Route path="/" exact component={Home} />
+                <Route component={NotFound} />
+            </Switch>
         </Fragment>
     );
   }
