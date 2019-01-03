@@ -1,0 +1,11 @@
+.NotFound {
+    width: 100%;
+    height: 100vh;
+}
+
+.NotFound img {
+    width: 100%;
+    height: 100%;
+    filter: grayscale(100%);
+    opacity: 0.8;
+}

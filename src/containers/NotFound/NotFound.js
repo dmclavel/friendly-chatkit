@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 
 import classes from './NotFound.css';
+import homeImg from '../../assets/home.jpg';
 
-export default class NotFound extends Component {
+class NotFound extends Component {
     render () {
         return (
-            <div>
-                <h1 style={{textAlign: 'center'}}> 404 Not Found </h1>
+            <div className={classes.NotFound}>
+                <img src={homeImg} alt="home_img" />
             </div>
         );
     }
 }
+
+export default NotFound;

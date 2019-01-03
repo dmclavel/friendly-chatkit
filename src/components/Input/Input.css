@@ -1,3 +1,19 @@
 .Input {
-    padding: 5px 5px;
+    padding: 0.4rem 0.4rem;
+    width: 100%;
+}
+
+.Input input {
+    border-radius: 30px;
+    color: #bc9643;
+    border: none;
+    width: 100%;
+    padding: 0.6rem 1.5rem;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.Input input:focus {
+    background: #241C1E;
+    box-shadow: 0.1rem 0.1rem 0.1rem lightgray;
 }

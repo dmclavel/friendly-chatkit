@@ -9,9 +9,6 @@ storage.rules
 # dependencies
 /node_modules
 
-# testing
-/coverage
-
 # production
 /dist
 
@@ -20,8 +17,7 @@ storage.rules
 /functions/node_modules
 
 #others
-/student-directory.xd
-/package-lock.json
+*.lock
 
 # misc
 .env

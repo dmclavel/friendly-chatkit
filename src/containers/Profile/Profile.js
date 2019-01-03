@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { getUserData } from '../../utils/getUserData/getUserData';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import fire from "../../config/fire";
 import classes from './Profile.css';
 
-export default class Profile extends Component {
+class Profile extends Component {
     state = {
         userProfile: {},
         loading: true
@@ -60,3 +61,9 @@ export default class Profile extends Component {
         );
     }
 }
+
+const mapStateToProps = state => {
+
+};
+
+export default connect(mapStateToProps)(Profile);
