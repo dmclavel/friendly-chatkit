@@ -1,0 +1,22 @@
+.SignUp {
+    display: inline-flex;
+    flex-direction: column;
+    width: 25%;
+    margin: 0 2rem;
+}
+
+.SignUp p {
+    font-family: 'Dancing Script', cursive;
+    text-align: center;
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+.SignUp button {
+    border: none;
+    border-radius: 30px;
+    padding: 10px;
+    margin: 0.4rem;
+    cursor: pointer;
+    width: 100%;
+}

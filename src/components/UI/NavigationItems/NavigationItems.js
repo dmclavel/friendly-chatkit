@@ -2,21 +2,14 @@ import React from "react";
 
 import { NavLink } from "react-router-dom";
 import classes from "./NavigationItems.css";
-import fire from "../../../config/fire";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
 
 const navigationItems = (props) => {
-    const user = fire.auth().currentUser;
-    let content = (
-        <Aux>
-            <span className={classes.SpanLink} onClick={props.login}> Login </span>
-            <span className={classes.SpanLink} onClick={props.showSignUp}> Register </span>
-        </Aux>
-    );
+    let content = null;
     if (props.authenticated && props.isVerified)
         content = (
             <Aux>
-                <NavLink to={"/profile/" + user.uid} activeClassName={classes.active}> Profile </NavLink>
+                <NavLink to={"/profile/" + props.uid} activeClassName={classes.active}> Profile </NavLink>
                 <NavLink to="/chat" activeClassName={classes.active}> Chat </NavLink>
                 <span className={classes.SpanLink} onClick={props.logout}> Logout </span>
             </Aux>

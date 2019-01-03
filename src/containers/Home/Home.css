@@ -1,0 +1,34 @@
+.Home {
+    display: flex;
+    justify-content: center;
+}
+
+.Darker {
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 1024px;
+    background-color: #000;
+}
+
+.Forms {
+    display: inherit;
+    position: fixed;
+    justify-content: center;
+    width: 100%;
+    top: 25%;
+}
+
+.Forms > p {
+    font-family: 'Dancing Script', cursive;
+    text-align: center;
+    color: #fff;
+    font-size: 2.5rem;
+    margin: auto 1rem;
+}
+
+.Darker img {
+    width: 100%;
+    height: 1024px;
+    opacity: 0.5;
+}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { getUserData } from '../../utils/getUserData/getUserData';
 import Spinner from '../../components/UI/Spinner/Spinner';
@@ -61,4 +62,8 @@ class Profile extends Component {
     }
 }
 
-export default Profile;
+const mapStateToProps = state => {
+
+};
+
+export default connect(mapStateToProps)(Profile);
