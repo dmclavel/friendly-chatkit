@@ -6,7 +6,6 @@ import SendMessageForm from "../../components/UI/SendMessageForm/SendMessageForm
 import dotenv from "dotenv";
 import fire from "../../config/fire";
 import classes from "./Chat.css";
-import { getName } from "../../utils/getName/getName";
 
 const Chatkit = require('@pusher/chatkit-server');
 
@@ -27,18 +26,12 @@ class Chat extends Component {
         dotenv.load();
         fire.auth().onAuthStateChanged(user => {
             if (user) {
-                let username = '';
+                let username = 'temporary';
                 const chatkit = new Chatkit.default({
                     instanceLocator: process.env.REACT_APP_INSTANCE_LOC,
                     key: process.env.REACT_APP_CHATKIT_KEY
                 });
-                getName()
-                    .then(name => {
-                        username = name;
-                    })
-                    .catch(err => {
-                        throw new Error(err);
-                    });
+
                 chatkit.getUser({
                     id: user.uid
                 })
