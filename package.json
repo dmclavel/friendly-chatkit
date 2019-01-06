@@ -7,7 +7,6 @@
     "@pusher/chatkit-client": "^1.2.0",
     "@pusher/chatkit-server": "^1.0.4",
     "@sentry/browser": "^4.3.2",
-    "bcryptjs": "^2.4.3",
     "dotenv": "^6.1.0",
     "dotenv-webpack": "^1.5.7",
     "firebase": "^5.5.8",
@@ -16,10 +15,10 @@
     "react-dom": "^16.6.3",
     "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
+    "react-transition-group": "^2.5.2",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
-    "serve": "^10.1.1",
-    "username-generator": "^1.1.0"
+    "serve": "^10.1.1"
   },
   "jest": {
     "verbose": true,

@@ -5,7 +5,7 @@
     margin: 0 2rem;
 }
 
-.SignUp p {
+.SignUp > p {
     font-family: 'Dancing Script', cursive;
     text-align: center;
     color: #fff;
@@ -16,7 +16,66 @@
     border: none;
     border-radius: 30px;
     padding: 10px;
-    margin: 0.4rem;
+    margin: 0.4rem 0;
     cursor: pointer;
     width: 100%;
+    outline: none;
+}
+
+.SignupSpinner {
+    position: relative;
+    height: 4rem;
+    margin: 0.75rem 0;
+}
+
+.SignupError {
+    font-family: 'Lato', sans-serif;
+    color: #fff;
+    margin: 0.75rem 0;
+    background-color: #da6c63;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+.ErrorShown {
+    animation: errorShown 0.4s ease-out forwards;
+}
+
+.ErrorClosed {
+    animation: errorClosed 0.6s ease-out backwards;
+}
+
+@keyframes errorShown {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateY(30%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes errorClosed {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateY(50%);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
 }

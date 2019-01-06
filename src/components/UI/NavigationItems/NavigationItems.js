@@ -17,7 +17,7 @@ const navigationItems = (props) => {
     else if (props.authenticated && !props.isVerified)
         content = (
             <Aux>
-                <NavLink to={"/profile/" + user.uid} activeClassName={classes.active}> Profile </NavLink>
+                <NavLink to={"/profile/" + props.uid} activeClassName={classes.active}> Profile </NavLink>
                 <span className={classes.SpanLink} onClick={props.verify}> Verify Account </span>
                 <span className={classes.SpanLink} onClick={props.logout}> Logout </span>
             </Aux>

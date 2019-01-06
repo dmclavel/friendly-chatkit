@@ -17,10 +17,16 @@ class App extends Component {
         this.props.onAuthListen();
     }
 
+    logoutRelocation = async () => {
+        await this.props.onLogout();    //wait for the asynchronous process to finish first
+        this.props.history.push('/');
+        window.location.reload(false);
+    };
+
     render() {
         return (
             <Layout isAuthenticated={this.props.isAuthenticated} isVerified={this.props.isVerified}
-                    logout={this.props.onLogout} verify={this.props.onVerify} uid={this.props.userId}>
+                    logout={this.logoutRelocation} verify={this.props.onVerify} uid={this.props.userId}>
                 <Switch>
                     <Route path="/profile/:id" component={Profile} />
                     <Route path="/about" component={About} />

@@ -4,13 +4,7 @@ import * as actionTypes from './actionTypes';
 const addUsersLoggedIn = (email) => {
     fire.database().ref('usersLoggedIn/' + fire.auth().currentUser.uid).set({
         email
-    }).then(() => {}).catch(() => {});
-};
-
-const removeUsersLoggedIn = () => {
-    fire.database().ref('usersLoggedIn/' + fire.auth().currentUser.uid).set({
-        email: null
-    }).then(() => {}).catch(() => {});
+    }).then(() => {});
 };
 
 export const startVerification = () => {
@@ -46,21 +40,24 @@ export const logoutSuccess = () => {
 };
 
 export const logout = () => {
-    return dispatch => {
+    return async dispatch => {
+        await fire.database().ref('usersLoggedIn/' + fire.auth().currentUser.uid).set({
+            email: null
+        }).then(() => {}).catch(() => {});
         fire.auth().signOut()
             .then(() => {
-                removeUsersLoggedIn();
                 dispatch(logoutSuccess());
             })
             .catch(error => {console.log(error.message)});
     }
 };
 
-export const authenticated = (userId, isVerified) => {
+export const authenticated = (userId, isVerified, verificationReload) => {
     return {
         type: actionTypes.AUTHENTICATED,
         userId,
-        isVerified
+        isVerified,
+        verificationReload
     }
 };
 
@@ -73,11 +70,27 @@ export const unauthenticated = () => {
 export const authListen = () => {
     return dispatch => {
         fire.auth().onAuthStateChanged(user => {
-           if (user)
-               dispatch(authenticated(user.uid, user.emailVerified));
+
+           if (user) {
+               user.reload()
+                   .then(() => {
+                       console.log(`Is Verified: ${user.emailVerified}`);
+                       if (user.emailVerified)
+                           dispatch(authenticated(user.uid, user.emailVerified, true));
+                       else
+                           dispatch(authenticated(user.uid, user.emailVerified, false));
+                   })
+                   .catch(err => console.log(err.message));
+           }
             else
                 dispatch(unauthenticated());
         });
+    }
+};
+
+export const loginStarted = () => {
+    return {
+        type: actionTypes.LOGINSTARTED
     }
 };
 
@@ -97,16 +110,22 @@ export const loginFailed = (error) => {
 
 export const login = (event, email, password) => {
     return dispatch => {
-        console.log('Email = ', email, '\n Password = ', password);
         event.preventDefault();
+        dispatch(loginStarted());
         fire.auth().signInWithEmailAndPassword(email, password)
             .then(userInfo => {
                 addUsersLoggedIn(email);
-                dispatch(loginSuccess(userInfo).user.uid);
+                dispatch(loginSuccess(userInfo.user.uid));
             })
             .catch(error => {
                 dispatch(loginFailed(error));
             });
+    }
+};
+
+export const signUpStarted = () => {
+    return {
+        type: actionTypes.SIGNUPSTARTED
     }
 };
 
@@ -124,22 +143,22 @@ export const signUpFailed = (error) => {
     }
 };
 
-export const signUp = (event, email, password) => {
+export const signUp = (event, email, password, username, mobileNumber) => {
     return dispatch => {
         event.preventDefault();
-        const accountCreated = new Date().toString();
+        dispatch(signUpStarted());
         fire.auth().createUserWithEmailAndPassword(email, password)
             .then(userInfo => {
                 addUsersLoggedIn(email);
-                fire.database().ref('usersData/' + fire.auth().currentUser.uid).set({
-                    displayName: '',
+                fire.database().ref('usersData/' + userInfo.user.uid).set({
+                    displayName: username,
                     email,
                     emailVerified: false,
-                    phoneNumber: '',
+                    phoneNumber: mobileNumber,
                     photoURL: 'https://www.freeiconspng.com/uploads/user-icon-png-person-user-profile-icon-20.png',
-                    accountCreated,
-                    metaData: 'User\'s description goes in here...'
-                }).then(() => {}).catch(() => {});
+                    accountCreated: new Date().toDateString(),
+                    metaData: 'User description goes in here...'
+                }).then(() => {});
                 dispatch(signUpSuccess(userInfo.user.uid));
             })
             .catch(error => {
@@ -167,8 +186,9 @@ export const resetPasswordFailed = (error) => {
     }
 };
 
-export const startResetPassword = (emailAddress) => {
+export const startResetPassword = (event, emailAddress) => {
     return dispatch => {
+        event.preventDefault();
         dispatch(resetPassword());
         fire.auth().sendPasswordResetEmail(emailAddress)
             .then(() => {
@@ -178,4 +198,10 @@ export const startResetPassword = (emailAddress) => {
                 dispatch(resetPasswordFailed(error));
             });
     };
+};
+
+export const resetErrors = () => {
+    return {
+        type: actionTypes.RESETERRORS
+    }
 };

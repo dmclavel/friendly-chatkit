@@ -6,7 +6,7 @@ import './index.css';
 import App from './App';
 import { BrowserRouter as Router } from 'react-router-dom';
 import dotenv from 'dotenv';
-import { init } from '@sentry/browser';
+import { init, showReportDialog } from '@sentry/browser';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === 'production') {
         debug: true,
         beforeSend (event) {
             if (event.exception)
-                sentry.showReportDialog();
+                showReportDialog();
             return event;
         }
     });
