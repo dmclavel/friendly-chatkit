@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
+import 'firebase/functions';
 
 const dotenv = require('dotenv');
 dotenv.load();

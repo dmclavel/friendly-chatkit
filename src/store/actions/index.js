@@ -4,5 +4,6 @@ export {
     authListen,
     logout,
     tryToVerify,
-    startResetPassword
+    startResetPassword,
+    resetErrors
 } from './authentication';
