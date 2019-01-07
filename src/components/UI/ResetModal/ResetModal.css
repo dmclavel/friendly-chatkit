@@ -1,23 +1,21 @@
 .Modal {
     position: fixed;
     z-index: 500;
-    background-color: #38ADAE;;
-    width: 50%;
-    border: 1px solid #38ADAE;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../../assets/Optimized-resetModal.jpg") left 0 bottom 0/cover no-repeat border-box, #241C1E;
+    border: none;
     padding: 16px;
-    left: 15%;
+    height: 300px;
     top: 30%;
     border-radius: 20px;
     box-sizing: border-box;
-    transition: all 0.3s ease-out;
 }
 
 .ShowModal {
-    animation: showModal 0.4s ease-out forwards;
+    animation: showModal 0.3s ease-out forwards;
 }
 
 .CloseModal {
-    animation: closeModal 0.4s ease-out forwards;
+    animation: closeModal 0.3s ease-out forwards;
 }
 
 @media (min-width: 600px) {

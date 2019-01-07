@@ -5,7 +5,7 @@
 }
 
 .Input input {
-    border-radius: 30px;
+    border-radius: 10px;
     color: #bc9643;
     border: none;
     width: 100%;
@@ -16,5 +16,5 @@
 
 .Input input:focus {
     background: #241C1E;
-    box-shadow: 0.1rem 0.1rem 0.1rem lightgray;
+    box-shadow: 1px 1px 1px lightgray;
 }

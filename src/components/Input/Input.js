@@ -6,6 +6,7 @@ const input = (props) => {
     return (
         <div className={classes.Input}>
             <input
+                style={props.inputStyle}
                 type={props.type}
                 placeholder={props.placeholder}
                 value={props.value}

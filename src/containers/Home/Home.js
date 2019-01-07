@@ -6,7 +6,7 @@ import Login from '../../components/Login/Login';
 import SignUp from '../../components/Signup/Signup';
 import ResetPassword from '../../components/ResetPassword/ResetPassword';
 import ResetModal from '../../components/UI/ResetModal/ResetModal';
-import AmiciImg from '../../assets/amici.jpg';
+import AmiciImg from '../../assets/Optimized-amici.jpg';
 import classes from './Home.css';
 
 class Home extends Component {
@@ -20,6 +20,9 @@ class Home extends Component {
             registerUsername: '',
             registerMobileNumber: '',
             resetPasswordEmail: '',
+            resetPasswordEmailChecker: '',
+            matching: false,
+            changeTracked: false,
             showModal: false
         };
         this.handleEmailChange = this.handleEmailChange.bind(this);
@@ -29,6 +32,7 @@ class Home extends Component {
         this.handleRegisterMobileNum = this.handleRegisterMobileNum.bind(this);
         this.handleRegisterUsername = this.handleRegisterUsername.bind(this);
         this.handleResetPassword = this.handleResetPassword.bind(this);
+        this.handlerResetPasswordChecker = this.handlerResetPasswordChecker.bind(this);
     }
 
     handleEmailChange(e) {
@@ -55,9 +59,26 @@ class Home extends Component {
         this.setState({ registerUsername: e.target.value });
     }
 
-    handleResetPassword(e) {
-        this.setState({ resetPasswordEmail: e.target.value })
+    async handleResetPassword(e) {
+        await this.setState({ resetPasswordEmail: e.target.value });
+        this.checkForChanges();
     }
+
+    async handlerResetPasswordChecker(e) {
+        await this.setState({ resetPasswordEmailChecker: e.target.value });
+        this.checkForChanges();
+        if (this.state.resetPasswordEmailChecker === this.state.resetPasswordEmail)
+            this.setState({ matching: true });
+        else
+            this.setState({ matching: false });
+    }
+
+    checkForChanges = () => {
+        if (this.state.resetPasswordEmailChecker.trim() !== '' && this.state.resetPasswordEmail.trim() !== '')
+            this.setState({ changeTracked: true });
+        else
+            this.setState({ changeTracked: false, matching: false });
+    };
 
     clearLocalLoginState = () => {
         this.setState({ emailAddress: '', password: '' });
@@ -69,7 +90,8 @@ class Home extends Component {
     };
 
     clearLocalResetPasswordState = () => {
-        this.setState({ resetPasswordEmail: '' });
+        this.setState({ resetPasswordEmail: '', resetPasswordEmailChecker: '',
+                                matching: false, changeTracked: false});
     };
 
     triggerResetModal = () => {
@@ -89,11 +111,12 @@ class Home extends Component {
                     this.clearLocalResetPasswordState();
                     this.triggerResetModal();
                 }}>
-                    <ResetPassword emailAddress={this.state.resetPasswordEmail} emailAddressChanged={this.handleResetPassword}
-                                    resetPassword={(event) => {
+                    <ResetPassword emailAddress={this.state.resetPasswordEmail} emailAddressChanged={this.handleResetPassword} matching={this.state.matching}
+                                   emailAddressChecker={this.state.resetPasswordEmailChecker} emailAddressCheckerChanged={this.handlerResetPasswordChecker}
+                                    changeTracked={this.state.changeTracked} resetPassword={(event) => {
                                         this.clearLocalResetPasswordState();
                                         this.props.onResetPassword(event, this.state.resetPasswordEmail);
-                                    }} willReset={this.props.willReset} errorReset={this.props.errorPasswordReset} />
+                                    }} willReset={this.props.willReset} errorReset={this.props.errorPasswordReset} successReset={this.props.successReset} />
                 </ResetModal>
                 <div className={classes.Darker}>
                     <img src={AmiciImg} alt="homepage-img" />
@@ -137,6 +160,7 @@ const mapStateToProps = state => {
       willSignup: state.auth.willSignup,
       errorSignup: state.auth.errorSignup,
       willReset: state.auth.willReset,
+      successReset: state.auth.successReset,
       errorPasswordReset: state.auth.errorPasswordReset
   }
 };
