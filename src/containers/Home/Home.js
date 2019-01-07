@@ -62,6 +62,10 @@ class Home extends Component {
     async handleResetPassword(e) {
         await this.setState({ resetPasswordEmail: e.target.value });
         this.checkForChanges();
+        if (this.state.resetPasswordEmailChecker === this.state.resetPasswordEmail)
+            this.setState({ matching: true });
+        else
+            this.setState({ matching: false });
     }
 
     async handlerResetPasswordChecker(e) {
