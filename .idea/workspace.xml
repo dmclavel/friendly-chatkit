@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="63233030-3ee4-454b-ba59-153ed7bdbbae" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Input/Input.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Input/Input.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Input/Input.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Input/Input.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Login/Login.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login/Login.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ResetPassword/ResetPassword.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ResetPassword/ResetPassword.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ResetPassword/ResetPassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ResetPassword/ResetPassword.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Signup/Signup.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Signup/Signup.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/UI/ResetModal/ResetModal.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UI/ResetModal/ResetModal.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/UI/ResetModal/ResetModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UI/ResetModal/ResetModal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/Home/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Home/Home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/NotFound/NotFound.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/NotFound/NotFound.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/NotFound/NotFound.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/NotFound/NotFound.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Profile/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Profile/Profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/reducers/authentication.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/reducers/authentication.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -28,11 +15,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/containers/Home/Home.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
-              <caret line="92" column="73" selection-start-line="92" selection-start-column="73" selection-end-line="92" selection-end-column="73" />
+            <state relative-caret-position="277">
+              <caret line="67" column="47" lean-forward="true" selection-start-line="67" selection-start-column="47" selection-end-line="67" selection-end-column="47" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -118,11 +105,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/ResetPassword/ResetPassword.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="54" column="45" lean-forward="true" selection-start-line="54" selection-start-column="45" selection-end-line="54" selection-end-column="45" />
+            <state relative-caret-position="235">
+              <caret line="71" column="32" lean-forward="true" selection-start-line="71" selection-start-column="32" selection-end-line="71" selection-end-column="32" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -212,9 +199,9 @@
         <option value="$PROJECT_DIR$/src/components/Signup/Signup.css" />
         <option value="$PROJECT_DIR$/src/components/UI/ResetModal/ResetModal.css" />
         <option value="$PROJECT_DIR$/src/components/ResetPassword/ResetPassword.css" />
-        <option value="$PROJECT_DIR$/src/containers/Home/Home.js" />
         <option value="$PROJECT_DIR$/src/store/reducers/authentication.js" />
         <option value="$PROJECT_DIR$/src/components/ResetPassword/ResetPassword.js" />
+        <option value="$PROJECT_DIR$/src/containers/Home/Home.js" />
       </list>
     </option>
   </component>
@@ -543,12 +530,12 @@
       <workItem from="1546705305795" duration="229000" />
       <workItem from="1546705554557" duration="12595000" />
       <workItem from="1546767980374" duration="23866000" />
-      <workItem from="1546839698656" duration="11444000" />
+      <workItem from="1546839698656" duration="12439000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="195870000" />
+    <option name="totallyTimeSpent" value="196865000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-37" width="1920" height="1117" extended-state="6" />
@@ -933,16 +920,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/Home/Home.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="92" column="73" selection-start-line="92" selection-start-column="73" selection-end-line="92" selection-end-column="73" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/store/actions/authentication.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
@@ -979,10 +956,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/ResetPassword/ResetPassword.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="54" column="45" lean-forward="true" selection-start-line="54" selection-start-column="45" selection-end-line="54" selection-end-column="45" />
+        <state relative-caret-position="235">
+          <caret line="71" column="32" lean-forward="true" selection-start-line="71" selection-start-column="32" selection-end-line="71" selection-end-column="32" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/Home/Home.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="67" column="47" lean-forward="true" selection-start-line="67" selection-start-column="47" selection-end-line="67" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
