@@ -11,7 +11,8 @@ const initialState = {
     willReset: false,
     errorLogin: null,
     errorSignup: null,
-    errorPasswordReset: null
+    errorPasswordReset: null,
+    successReset: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -81,24 +82,28 @@ const reducer = (state = initialState, action) => {
         case actionTypes.RESETPASSWORD:
             return {
                 ...state,
+                successReset: false,
                 willReset: true,
                 errorPasswordReset: null
             };
         case actionTypes.RESETPASSWORDSUCCESS:
             return {
                 ...state,
+                successReset: true,
                 willReset: false,
                 errorPasswordReset: null
             };
         case actionTypes.RESETPASSWORDFAILED:
             return {
                 ...state,
+                successReset: false,
                 willReset: false,
                 errorPasswordReset: action.error
             };
         case actionTypes.RESETERRORS:
             return {
                 ...state,
+                successReset: false,
                 errorLogin: null,
                 errorSignup: null,
                 errorPasswordReset: null

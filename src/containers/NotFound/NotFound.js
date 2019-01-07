@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import classes from './NotFound.css';
-import homeImg from '../../assets/home.jpg';
+import homeImg from '../../assets/Optimized-home.jpg';
 
 class NotFound extends Component {
     render () {

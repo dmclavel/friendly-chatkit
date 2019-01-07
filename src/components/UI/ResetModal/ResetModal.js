@@ -10,7 +10,7 @@ const resetModal = (props) => {
             <CSSTransition in={props.show} classNames={{
                                 enterActive: classes.ShowModal,
                                 exitActive: classes.CloseModal
-                            }} timeout={400}
+                            }} timeout={300}
                            mountOnEnter unmountOnExit>
                 <div className={classes.Modal}>
                     {props.children}

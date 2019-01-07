@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import { getUserData } from '../../utils/getUserData/getUserData';
 import Spinner from '../../components/UI/Spinner/Spinner';
@@ -32,6 +33,8 @@ class Profile extends Component {
     }
 
     render () {
+        let profileRedirect = !this.props.isAuthenticated ? <Redirect to="/" /> : null;
+
         const verifiedURL = 'https://www.continent8.com/wp-content/uploads/2017/10/tick-icon.png';
         let content = <Spinner />;
         if (!this.state.loading) {
@@ -56,6 +59,7 @@ class Profile extends Component {
         }
         return (
             <div className={classes.ProfileWindow}>
+                {profileRedirect}
                 {content}
             </div>
         );
@@ -63,7 +67,9 @@ class Profile extends Component {
 }
 
 const mapStateToProps = state => {
-
+    return {
+        isAuthenticated: state.auth.isAuthenticated
+    }
 };
 
 export default connect(mapStateToProps)(Profile);
